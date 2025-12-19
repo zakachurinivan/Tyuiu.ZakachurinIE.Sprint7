@@ -4,7 +4,7 @@ namespace Tyuiu.ZakachurinIE.Sprint7.Project.V11.Lib
 {
     public class DataService
     {
-        public class Employee
+        public class Employee // каждый сотрудник в списке будет иметь такие х-ки
         {
             public string Surname { get; set; }
             public string Name { get; set; }
@@ -24,10 +24,10 @@ namespace Tyuiu.ZakachurinIE.Sprint7.Project.V11.Lib
 
         public DataService()
         {
-            _employees = new List<Employee>();
+            _employees = new List<Employee>(); // делаю списочек
         }
 
-        public void LoadFromFile(string filePath)
+        public void LoadFromFile(string filePath) // этот метод читает данные из файла.ксв и заполняет колоночки в списке
         {            
             _employees.Clear();          
             string[] lines = File.ReadAllLines(filePath);           
@@ -40,9 +40,28 @@ namespace Tyuiu.ZakachurinIE.Sprint7.Project.V11.Lib
             }
 
         }
-        public List<Employee> GetAllEmployees()
+        public List<Employee> GetAllEmployees() // выводим весь список всех сотрудников
         {
             return _employees;
         }
+        public List<Employee> SearchBySurname(string surname) // следуя из названия - поиск по фамилии, для которого не обязательна полная фамилия
+        {
+            return _employees.Where(e => e.Surname.IndexOf(surname, StringComparison.OrdinalIgnoreCase)>=0).ToList();
+        }       
+        public List<Employee> SearchByName(string name) // поиск по имени, можно написать лишь часть имени
+        {
+            return _employees.Where(e => e.Name.IndexOf(name, StringComparison.OrdinalIgnoreCase)>=0).ToList();
+        }        
+        public List<Employee> SearchByPatronymic(string patronymic) // поиск по отчеству
+        {
+            return _employees.Where(e => e.Patronymic.IndexOf(patronymic, StringComparison.OrdinalIgnoreCase)>=0).ToList();
+
+        }
+        public List<Employee> SearchByPhone(string phone) // поиск по телефону, также можно написать только часть номера, а не весь
+        {
+            return _employees.Where(e => e.PhoneNumber.Contains(phone.Trim())).ToList();
+        }
+
+
     }
 }
