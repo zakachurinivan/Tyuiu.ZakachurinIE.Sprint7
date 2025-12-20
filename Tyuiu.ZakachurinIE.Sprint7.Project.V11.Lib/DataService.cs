@@ -64,6 +64,10 @@ namespace Tyuiu.ZakachurinIE.Sprint7.Project.V11.Lib
         {
             return employees.Where(e => e.ExperienceYears >= minYears && e.ExperienceYears <= maxYears).ToList();
         }
+        public List<Employee> SearchByPositionContains(string positionPart) // поиск по должности ( можно написать только часть слова)
+        {
+            return employees.Where(e => e.Position.IndexOf(positionPart, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+        }
         public List<Employee> SortByExperience() // сортировка стажа по возрастанию
         {
             return  employees.OrderBy(e => e.ExperienceYears).ToList();
@@ -107,5 +111,50 @@ namespace Tyuiu.ZakachurinIE.Sprint7.Project.V11.Lib
             if (employees.Count == 0) return 0;
             return employees.Max(e => e.ExperienceYears);
         }
+        public double GetAverageAge() // средний возраст
+        {
+            if (employees.Count == 0) return 0;
+            DateTime today = DateTime.Today;
+            double totalAge = 0;
+            foreach (var emp in employees)
+            {
+                int age = today.Year - emp.BirthDate.Year;
+                if (emp.BirthDate.Date > today.AddYears(-age))
+                    age--;
+                totalAge += age;
+            }
+            return totalAge / employees.Count;
+        }
+        public void SaveToFile(string filePath) // сохранение в файл
+        {
+            using (StreamWriter writer = new StreamWriter(filePath, false, Encoding.UTF8))
+            {                             
+                foreach (var emp in employees)
+                {
+                    string line = $"{emp.Surname};{emp.Name};{emp.Patronymic};{emp.Address};{emp.PhoneNumber};{emp.BirthDate:dd.MM.yyyy};{emp.Position};{emp.StartDate:dd.MM.yyyy};{emp.ExperienceYears}";
+                    writer.WriteLine(line);
+                }
+            }
+        }
+        public void AddEmployee(Employee emp) // добавление сотрудника
+        {
+            if (emp == null) return;
+            employees.Add(emp);
+        }
+        public void RemoveEmployee(int index) // удаление сотрудника по индексу
+        {
+            if (index >= 0 && index < employees.Count)
+            {
+                employees.RemoveAt(index);
+            }
+        }
+        public void UpdateEmployee(int index, Employee emp) // обновление данных о сотруднике
+        {
+            if (index >= 0 && index < employees.Count && emp != null)
+            { 
+                employees[index] = emp; 
+            }
+        }
+
     }
 }

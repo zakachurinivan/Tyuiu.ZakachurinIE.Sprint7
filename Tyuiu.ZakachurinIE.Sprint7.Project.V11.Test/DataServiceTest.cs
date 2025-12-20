@@ -143,6 +143,105 @@ namespace Tyuiu.ZakachurinIE.Sprint7.Project.V11.Test
                 Assert.IsTrue(sorted[i].StartDate >= sorted[i + 1].StartDate);
             }
         }
+        [TestMethod]
+        public void GetEmployeeCountValid()
+        {
+            DataService ds = new DataService();
+            string path = @"C:\DataSprint7\Employees.csv";
+            ds.LoadFromFile(path);
+            Assert.AreEqual(2, ds.GetEmployeeCount());
+        }
+        [TestMethod]
+        public void GetAverageExperienceValid()
+        {
+            DataService ds = new DataService();
+            string path = @"C:\DataSprint7\Employees.csv";
+            ds.LoadFromFile(path);            
+            Assert.AreEqual(12.5, ds.GetAverageExperience());
+        }
+        [TestMethod]
+        public void GetMinExperienceValid()
+        {
+            DataService ds = new DataService();
+            string path = @"C:\DataSprint7\Employees.csv";
+            ds.LoadFromFile(path);
+            Assert.AreEqual(10, ds.GetMinExperience());
+        }
+        [TestMethod]
+        public void GetMaxExperienceValid()
+        {
+            DataService ds = new DataService();
+            string path = @"C:\DataSprint7\Employees.csv";
+            ds.LoadFromFile(path);
+            Assert.AreEqual(15, ds.GetMaxExperience());
+        }
+        [TestMethod]
+        public void SaveToFileValid()
+        {
+            DataService ds = new DataService();
+            string path = @"C:\DataSprint7\Employees.csv";
+            ds.LoadFromFile(path);
 
+            string testSavePath = @"C:\DataSprint7\TestSave.csv";
+            ds.SaveToFile(testSavePath);
+            Assert.IsTrue(File.Exists(testSavePath));
+            DataService ds2 = new DataService();
+            ds2.LoadFromFile(testSavePath);
+            Assert.AreEqual(ds.GetEmployeeCount(), ds2.GetEmployeeCount());
+        }
+        [TestMethod]
+        public void GetAverageAgeValid()
+        {
+            DataService ds = new DataService();
+            string path = @"C:\DataSprint7\Employees.csv";
+            ds.LoadFromFile(path);
+            double age = ds.GetAverageAge();
+            Assert.IsTrue(age >= 20 && age <= 80);
+        }
+        [TestMethod]
+        public void AddEmployeeValid()
+        {
+            DataService ds = new DataService();
+            int count = ds.GetEmployeeCount();
+            ds.AddEmployee(new Employee
+            {
+                Surname = "Петров",
+                Name = "Петр",
+                BirthDate = new DateTime(1990, 1, 1),
+                StartDate = DateTime.Today,
+                ExperienceYears = 5
+            });
+
+            Assert.AreEqual(count + 1, ds.GetEmployeeCount());
+        }
+        [TestMethod]
+        public void RemoveEmployee_ValidIndex_DecreasesCount()
+        {
+            DataService ds = new DataService();
+            string path = @"C:\DataSprint7\Employees.csv";
+            ds.LoadFromFile(path);
+            int k = ds.GetEmployeeCount();
+            ds.RemoveEmployee(0);
+            Assert.AreEqual(k - 1, ds.GetEmployeeCount());
+        }
+        [TestMethod]
+        public void UpdateEmployee_ValidIndex_UpdatesData()
+        {
+            DataService ds = new DataService();
+            string path = @"C:\DataSprint7\Employees.csv";
+            ds.LoadFromFile(path);
+            var newEmp = new Employee
+            {
+                Surname = "Обновлённый",
+                Name = "Сотрудник",
+                BirthDate = new DateTime(2000, 1, 1),
+                StartDate = DateTime.Today,
+                ExperienceYears = 1
+            };
+            ds.UpdateEmployee(0, newEmp);
+            var updated = ds.GetAllEmployees()[0];
+            Assert.AreEqual("Обновлённый", updated.Surname);
+            Assert.AreEqual(1, updated.ExperienceYears);
+        }
     }
 }
