@@ -40,7 +40,6 @@
             toolStripButtonStats_ZIE = new ToolStripButton();
             menuStripMain_ZIE = new MenuStrip();
             ToolStripMenuItemFile_ZIE = new ToolStripMenuItem();
-            ToolStripMenuItemOpen_ZIE = new ToolStripMenuItem();
             ToolStripMenuItemSave_ZIE = new ToolStripMenuItem();
             ToolStripMenuItemExit_ZIE = new ToolStripMenuItem();
             ToolStripMenuItemPravka_ZIE = new ToolStripMenuItem();
@@ -62,6 +61,7 @@
             textBoxPositionText_ZIE = new TextBox();
             textBoxPhoneText_ZIE = new TextBox();
             dataGridViewOutPut_ZIE = new DataGridView();
+            buttonSearch_ZIE = new Button();
             panelMain_ZIE.SuspendLayout();
             groupBoxMainMenu_ZIE.SuspendLayout();
             toolStripToolsPanel_ZIE.SuspendLayout();
@@ -109,6 +109,7 @@
             toolStripButtonAdd_ZIE.Name = "toolStripButtonAdd_ZIE";
             toolStripButtonAdd_ZIE.Size = new Size(23, 22);
             toolStripButtonAdd_ZIE.Text = "Добавить";
+            toolStripButtonAdd_ZIE.Click += ToolStripButtonAdd_Click;
             // 
             // toolStripButtonEdit_ZIE
             // 
@@ -118,6 +119,7 @@
             toolStripButtonEdit_ZIE.Name = "toolStripButtonEdit_ZIE";
             toolStripButtonEdit_ZIE.Size = new Size(23, 22);
             toolStripButtonEdit_ZIE.Text = "Редактировать";
+            toolStripButtonEdit_ZIE.Click += toolStripButtonEdit_ZIE_Click;
             // 
             // toolStripButtonDelete_ZIE
             // 
@@ -127,6 +129,7 @@
             toolStripButtonDelete_ZIE.Name = "toolStripButtonDelete_ZIE";
             toolStripButtonDelete_ZIE.Size = new Size(23, 22);
             toolStripButtonDelete_ZIE.Text = "Удалить";
+            toolStripButtonDelete_ZIE.Click += toolStripButtonDelete_ZIE_Click;
             // 
             // toolStripButtonSave_ZIE
             // 
@@ -136,6 +139,7 @@
             toolStripButtonSave_ZIE.Name = "toolStripButtonSave_ZIE";
             toolStripButtonSave_ZIE.Size = new Size(23, 22);
             toolStripButtonSave_ZIE.Text = "Сохранить";
+            toolStripButtonSave_ZIE.Click += toolStripButtonSave_ZIE_Click;
             // 
             // toolStripButtonSearch_ZIE
             // 
@@ -166,27 +170,22 @@
             // 
             // ToolStripMenuItemFile_ZIE
             // 
-            ToolStripMenuItemFile_ZIE.DropDownItems.AddRange(new ToolStripItem[] { ToolStripMenuItemOpen_ZIE, ToolStripMenuItemSave_ZIE, ToolStripMenuItemExit_ZIE });
+            ToolStripMenuItemFile_ZIE.DropDownItems.AddRange(new ToolStripItem[] { ToolStripMenuItemSave_ZIE, ToolStripMenuItemExit_ZIE });
             ToolStripMenuItemFile_ZIE.Name = "ToolStripMenuItemFile_ZIE";
             ToolStripMenuItemFile_ZIE.Size = new Size(48, 20);
             ToolStripMenuItemFile_ZIE.Text = "Файл";
             // 
-            // ToolStripMenuItemOpen_ZIE
-            // 
-            ToolStripMenuItemOpen_ZIE.Name = "ToolStripMenuItemOpen_ZIE";
-            ToolStripMenuItemOpen_ZIE.Size = new Size(133, 22);
-            ToolStripMenuItemOpen_ZIE.Text = "Открыть";
-            // 
             // ToolStripMenuItemSave_ZIE
             // 
             ToolStripMenuItemSave_ZIE.Name = "ToolStripMenuItemSave_ZIE";
-            ToolStripMenuItemSave_ZIE.Size = new Size(133, 22);
+            ToolStripMenuItemSave_ZIE.Size = new Size(180, 22);
             ToolStripMenuItemSave_ZIE.Text = "Сохранить";
+            ToolStripMenuItemSave_ZIE.Click += toolStripButtonSave_ZIE_Click;
             // 
             // ToolStripMenuItemExit_ZIE
             // 
             ToolStripMenuItemExit_ZIE.Name = "ToolStripMenuItemExit_ZIE";
-            ToolStripMenuItemExit_ZIE.Size = new Size(133, 22);
+            ToolStripMenuItemExit_ZIE.Size = new Size(180, 22);
             ToolStripMenuItemExit_ZIE.Text = "Выход";
             // 
             // ToolStripMenuItemPravka_ZIE
@@ -201,12 +200,14 @@
             ToolStripMenuItemAdd_ZIE.Name = "ToolStripMenuItemAdd_ZIE";
             ToolStripMenuItemAdd_ZIE.Size = new Size(154, 22);
             ToolStripMenuItemAdd_ZIE.Text = "Добавить";
+            ToolStripMenuItemAdd_ZIE.Click += ToolStripButtonAdd_Click;
             // 
             // ToolStripMenuItemEdit_ZIE
             // 
             ToolStripMenuItemEdit_ZIE.Name = "ToolStripMenuItemEdit_ZIE";
             ToolStripMenuItemEdit_ZIE.Size = new Size(154, 22);
             ToolStripMenuItemEdit_ZIE.Text = "Редактировать";
+            ToolStripMenuItemEdit_ZIE.Click += toolStripButtonEdit_ZIE_Click;
             // 
             // ToolStripMenuItemDelete_ZIE
             // 
@@ -244,6 +245,7 @@
             // 
             // groupBoxInf_ZIE
             // 
+            groupBoxInf_ZIE.Controls.Add(buttonSearch_ZIE);
             groupBoxInf_ZIE.Controls.Add(textBoxExpStopInput_ZIE);
             groupBoxInf_ZIE.Controls.Add(comboBoxPositionInput_ZIE);
             groupBoxInf_ZIE.Controls.Add(textBoxExpStartInput_ZIE);
@@ -344,9 +346,21 @@
             dataGridViewOutPut_ZIE.Dock = DockStyle.Fill;
             dataGridViewOutPut_ZIE.Location = new Point(0, 204);
             dataGridViewOutPut_ZIE.Name = "dataGridViewOutPut_ZIE";
+            dataGridViewOutPut_ZIE.ReadOnly = true;
             dataGridViewOutPut_ZIE.RowHeadersVisible = false;
+            dataGridViewOutPut_ZIE.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewOutPut_ZIE.Size = new Size(685, 246);
             dataGridViewOutPut_ZIE.TabIndex = 2;
+            dataGridViewOutPut_ZIE.CellDoubleClick += dataGridViewOutPut_ZIE_CellDoubleClick;
+            // 
+            // buttonSearch_ZIE
+            // 
+            buttonSearch_ZIE.Location = new Point(425, 12);
+            buttonSearch_ZIE.Name = "buttonSearch_ZIE";
+            buttonSearch_ZIE.Size = new Size(83, 71);
+            buttonSearch_ZIE.TabIndex = 2;
+            buttonSearch_ZIE.Text = "Найти";
+            buttonSearch_ZIE.UseVisualStyleBackColor = true;
             // 
             // FormMain
             // 
@@ -381,7 +395,6 @@
         private Panel panelMain_ZIE;
         private MenuStrip menuStripMain_ZIE;
         private ToolStripMenuItem ToolStripMenuItemFile_ZIE;
-        private ToolStripMenuItem ToolStripMenuItemOpen_ZIE;
         private ToolStripMenuItem ToolStripMenuItemSave_ZIE;
         private ToolStripMenuItem ToolStripMenuItemExit_ZIE;
         private ToolStripMenuItem ToolStripMenuItemPravka_ZIE;
@@ -414,5 +427,6 @@
         private ComboBox comboBoxPositionInput_ZIE;
         private GroupBox groupBoxInf_ZIE;
         private DataGridView dataGridViewOutPut_ZIE;
+        private Button buttonSearch_ZIE;
     }
 }

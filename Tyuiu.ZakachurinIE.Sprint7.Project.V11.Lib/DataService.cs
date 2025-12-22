@@ -151,6 +151,12 @@ namespace Tyuiu.ZakachurinIE.Sprint7.Project.V11.Lib
                 employees[index] = emp; 
             }
         }
+        public Employee GetEmployee(int index)
+        {
+            if (index >= 0 && index < employees.Count)
+                return employees[index];
+            return null;
+        }
 
     }
 }
