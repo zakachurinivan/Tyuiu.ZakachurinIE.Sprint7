@@ -215,7 +215,7 @@ namespace Tyuiu.ZakachurinIE.Sprint7.Project.V11.Test
             Assert.AreEqual(count + 1, ds.GetEmployeeCount());
         }
         [TestMethod]
-        public void RemoveEmployee_ValidIndex_DecreasesCount()
+        public void RemoveEmployeeValid()
         {
             DataService ds = new DataService();
             string path = @"C:\DataSprint7\Employees.csv";
@@ -225,7 +225,7 @@ namespace Tyuiu.ZakachurinIE.Sprint7.Project.V11.Test
             Assert.AreEqual(k - 1, ds.GetEmployeeCount());
         }
         [TestMethod]
-        public void UpdateEmployee_ValidIndex_UpdatesData()
+        public void UpdateEmployeeValid()
         {
             DataService ds = new DataService();
             string path = @"C:\DataSprint7\Employees.csv";

@@ -18,15 +18,11 @@ namespace Tyuiu.ZakachurinIE.Sprint7.Project.V11.Lib
 
             
         }
-
-        
         private List<Employee> employees;
-
         public DataService()
         {
             employees = new List<Employee>(); // делаю списочек
         }
-
         public void LoadFromFile(string filePath) // этот метод читает данные из файла.ксв и заполняет колоночки в списке
         {            
             employees.Clear();          
