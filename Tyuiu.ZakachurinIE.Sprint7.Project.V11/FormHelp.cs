@@ -1,0 +1,24 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Tyuiu.ZakachurinIE.Sprint7.Project.V11
+{
+    public partial class FormHelp : Form
+    {
+        public FormHelp()
+        {
+            InitializeComponent();
+        }
+        private void buttonOK_ZIE_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+    }
+}

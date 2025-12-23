@@ -77,7 +77,7 @@
             groupBoxAboutEmpl_ZIE.Dock = DockStyle.Fill;
             groupBoxAboutEmpl_ZIE.Location = new Point(0, 0);
             groupBoxAboutEmpl_ZIE.Name = "groupBoxAboutEmpl_ZIE";
-            groupBoxAboutEmpl_ZIE.Size = new Size(375, 318);
+            groupBoxAboutEmpl_ZIE.Size = new Size(240, 318);
             groupBoxAboutEmpl_ZIE.TabIndex = 0;
             groupBoxAboutEmpl_ZIE.TabStop = false;
             groupBoxAboutEmpl_ZIE.Text = "Данные сотрудника";
@@ -267,7 +267,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(375, 318);
+            ClientSize = new Size(240, 318);
             Controls.Add(groupBoxAboutEmpl_ZIE);
             Name = "FormEmployee_ZIE";
             Text = "Добавление и редактирование сотрудников";
